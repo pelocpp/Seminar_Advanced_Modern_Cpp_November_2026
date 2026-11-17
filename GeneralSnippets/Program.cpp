@@ -40,7 +40,7 @@ int main()
         //main_casts();
         //main_common_type();
         //main_concepts_requires_classes();
-        //main_concepts_requires_functions();
+        main_concepts_requires_functions();
         //main_const_variants();
         //main_constexpr();
         //main_constexpr_crc();
@@ -60,8 +60,8 @@ int main()
         //main_functional_programming_legacy();
         //main_functional_programming_alternate();
         //main_generate();
-        //main_generic_functions();
-        main_initializer_list();
+      //  main_generic_functions();
+     //   main_initializer_list();
         //main_input_output_streams();  
         //main_invoke();
         //main_is_transparent();
@@ -92,7 +92,7 @@ int main()
         //main_shared_ptr();
         //main_source_location();
         //main_spaceship_operator();
-        //main_sso();
+       // main_sso();
         //main_static_assert();
         //main_string_view();
         //main_structured_binding();

@@ -11,7 +11,7 @@ Referent: Peter Loos
 Dienstag Nachmittag:
 
 == SSO
-== Generische Funktionen
+== Generische Funktionen // auto
 == Algorithmen ( std::fill ........... )
 == Ein Beispiel für Performanz
    (https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Data_Structures_and_Algorithms/Readme_STL_Algorithms.md#link8)
@@ -40,6 +40,9 @@ Todo:
 STL:   std::fill
 Kernphilosophie
 noexcept
+
+
+explicit
 
 
 // ===================================================
@@ -184,6 +187,20 @@ SSO   Small String Optimization
 
 // =============================================================
 
+std::string //  capacity   // reserve: 
 
+std::vector   //  capacity   // reserve: 
+
+
+
+'isGreaterThanFifty'
+
+local function definitions are illegal
+
+==================================================
+
+https://github.com/pelocpp/cpp_design_patterns/blob/master/Patterns/Facade/Resources/Readme.md
+
+==================================================
 
 

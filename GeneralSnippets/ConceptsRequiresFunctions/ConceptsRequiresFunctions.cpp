@@ -50,7 +50,7 @@ namespace Requires_Clause {
         //    the concept 'Numerical<std::string>' evaluated to false
         //    the concept 'std::floating_point<std::string>' evaluated to false
         //    the concept 'std::integral<std::string>' evaluated to false
-        // auto sum4 = add(std::string { "ABC" }, std::string { "DEF" });
+       // auto sum4 = add(std::string { "ABC" }, std::string { "DEF" });
     }
 
     // ---------------------------------------------------------------------------------
@@ -176,10 +176,12 @@ namespace Constrained_Template_Parameters {
 
 namespace Abbreviated_Function_Templates {
 
-    static auto add(Numerical auto a, Numerical auto b)
+    static auto add (Numerical  auto  a, Numerical  auto b)
     {
         return a + b;
     }
+
+
 
     static void test_abbreviated_function_template_syntax()
     {
@@ -197,13 +199,19 @@ namespace Abbreviated_Function_Templates {
 namespace UserDefined_Concept {
 
     template<typename T>
-    constexpr bool isGreaterThanWord{ sizeof(T) > 2 };
+    constexpr bool isGreaterThanWord = sizeof(T) > 2 ;
+
+    template<typename T>
+    constexpr bool isIntOrLong = std::is_same<T, int>::value or std::is_same<T, long>::value;
+
 
     // using <type_traits>
     template <typename T>
     concept GreatIntegral = std::is_integral<T>::value and isGreaterThanWord<T>;
 
-    template<GreatIntegral T>
+   // template<GreatIntegral T>
+    template <typename T>
+        requires GreatIntegral <T> and isIntOrLong<T>
     T incrementByOne(const T& arg) {
         return arg + 1;
     }
@@ -218,11 +226,15 @@ namespace UserDefined_Concept {
 
         n = incrementByOne(n);
 
-        // short s{ 1 };
-        // the associated constraints are not satisfied:
-        // s = incrementByOne(s);
+        //short s{ 1 };
+        //// the associated constraints are not satisfied:
+        //s = incrementByOne(s);
 
         n = incrementByTwo(n);
+
+        //long long s{ 1 };
+        //// the associated constraints are not satisfied:
+        //s = incrementByOne(s);
 
         // short s{ 1 };
         // the associated constraints are not satisfied:
