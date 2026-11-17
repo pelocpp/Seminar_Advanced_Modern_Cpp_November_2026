@@ -12,10 +12,15 @@ namespace {
     // Brace initialization does not allow narrowing:
     void brace_initialization_00()
     {
-        double dval{ 123.456 };
+        double dval{ 123 };
+
         int ival{ 123 };
 
-        double d1 = ival;      // Compiles
+        double d1 = ival;      // Compiles  // Konvertierung
+        
+     //   double d2{ ival };   // does NOT Compile
+        
+        
         // double d2{ ival };  // Error: "conversion from 'int' to 'double' requires a narrowing conversion"
     }
 
@@ -24,6 +29,10 @@ namespace {
 
     void brace_initialization_01()
     {
+        int x1 = 1;
+
+        int x2{};
+
         int n{};                   // n equals 0
         float f{};                 // f equals 0.0
         double d{};                // d equals 0.0
@@ -43,6 +52,10 @@ namespace {
 
     void brace_initialization_02()
     {
+        int x1 = 1;
+
+        int x2{ 1 };
+
         int n{ 1 };                // n equals 1
         float f{ 2.5f };           // f equals 2.5
         double d{ 3.5 };           // d equals 3.5
@@ -59,15 +72,25 @@ namespace {
     // =================================================================================
     // user-defined types: structs
 
+    // C-Struktur: C++  POD Plain Old Datatype
+    //struct Struct
+    //{
+    //    int m_i;
+    //    int m_j;
+    //};
+
     struct Struct
     {
-        int m_i;
+        //int m_i = 1;   // default initializer
+        //int m_j{ 1};
+        //int m_k = 0;
+
+        int m_i;   // default initializer
         int m_j;
     };
 
     void brace_initialization_03()
     {
-        [[ maybe_unused]]
         struct Struct obj0;                           // uninitialized !!!
 
         struct Struct obj1 {};                        // obj1.m_i => 0, obj1.m_j => 0
@@ -106,7 +129,7 @@ namespace {
         int m_b;
 
     public:
-        Class(int a, int b) : m_a{ a }, m_b{ b } {}
+        Class(int a, int b) : m_a( a ), m_b{ b } {}
     };
 
     void brace_initialization_05()
@@ -206,7 +229,6 @@ namespace {
 
     void brace_initialization_09()
     {
-        [[ maybe_unused]]
         int intArray1[10];
 
         int intArray2[10]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

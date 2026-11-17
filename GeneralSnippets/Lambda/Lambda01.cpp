@@ -2,6 +2,10 @@
 // Lambda01.cpp // Lambda Methods
 // =====================================================================================
 
+module;
+
+#include <print>
+
 module modern_cpp:lambda;
 
 import std;
@@ -11,10 +15,63 @@ namespace {
     // =================================================================================
     // Lambdas: Anonymous Function Objects
 
-    static void print(int n)
+    // freie Funktion
+
+    // The signature does not need to have const &.
+    // 1. Variante: Freie Funktion
+    void print(int n)
     {
+        int m = n;
         std::print("{} ", n);
     }
+
+    // Aufrufbares Objekt  // Funktor 
+    class MyPrinter
+    {
+    private:
+        std::string m_header;
+
+     public:
+         MyPrinter() { m_header = "==>"; }
+         MyPrinter(const std::string& h) { m_header = h; }
+
+        void operator () (int n) {
+            std::print("{} {}", m_header, n);
+        }
+
+        void print(){}
+    };
+
+    void lambda_01_seminar__()
+    {
+        MyPrinter obj("---------->");
+        obj(123);
+    }
+
+    void lambda_01_seminar()
+    {
+        std::vector<int> vec{ 1, 2, 3 };
+
+       //  MyPrinter printer ("------------>>");
+
+        //auto  var = [](int n) {
+        //    std::print("{} ", n);
+        //};
+
+        std::string header ("===> ");
+
+        std::for_each(
+            vec.begin(),
+            vec.end(),
+            [&] (int n) /*-> void */{
+                std::print("{} {}", header, n);
+            }
+        );
+
+        std::println();
+    }
+
+
 
     class Printer
     {
@@ -97,10 +154,10 @@ namespace {
         int n{ 1 };
         int m{ 2 };
 
-        auto l1{ [=] { std::println("Copy:      {} {}", n, m); } };
-        auto l2{ [&] { std::println("Reference: {} {}", n, m); } };
-        auto l3{ [&, m] { std::println("Both:      {} {}", n, m); } };
-        auto l4{ [=, &m] { std::println("More both: {} {}", n, m); } };
+        auto l1{ [=] () { std::println("Copy:      {} {}", n, m); } };
+        auto l2{ [&] () { std::println("Reference: {} {}", n, m); } };
+        auto l3{ [&, m] () { std::println("Both:      {} {}", n, m); } };
+        auto l4{ [=, &m]() { std::println("More both: {} {}", n, m); } };
 
         n = 3;
         m = 4;
@@ -113,7 +170,7 @@ namespace {
 
     static void lambda_02()
     {
-        lambda_02_01();
+       // lambda_02_01();
         lambda_02_02();
     }
 
@@ -153,7 +210,7 @@ namespace {
     {
         std::string s{ "Hello" };
 
-        class LambdaClosure
+        class LambdaClosure  // Closure:  Java Script
         {
         private:
             std::string m_s;
@@ -235,16 +292,28 @@ namespace {
 
     static void lambda_06()
     {
-        std::size_t value{ 123 };
 
-        auto increment = [=]() mutable -> std::size_t {
+     //   auto value = 10;
 
-            ++value;
+        auto incrementer = [  value = 10]() mutable{
+            
+            // int value = 10;
+            value++;
             return value;
             };
 
-        value = increment();
-        std::println("{}", value);
+     //   value = 123;
+
+        auto value2 = incrementer();
+        std::println("{}", value2);
+
+        value2 = incrementer();
+        std::println("{}", value2);
+
+        value2 = incrementer();
+        std::println("{}", value2);
+
+
     }
 
     // =================================================================================
@@ -270,10 +339,19 @@ namespace {
 
     static void lambda_08_01()
     {
-        auto lambdaOne = []() { std::println("One"); };
-        auto lambdaTwo = []() { std::println("Two"); };
+        auto lambdaOne = []() -> void { std::println("One"); };
+        auto lambdaTwo = []() -> void { std::println("Two"); };
 
-        std::vector<std::function<void()>> myLambdas;
+        
+        //auto lambdaTwo = [](int n) -> void { std::println("Two"); };
+        //auto lambdaTwo = [](int n, int m) -> void { std::println("Two"); };
+
+        // Signatur
+        std::function< void () > f;
+
+      //  std::vector <auto> methods;
+
+        std::vector<std::function< void()> > myLambdas;
 
         myLambdas.push_back(lambdaOne);
         myLambdas.push_back(lambdaTwo);
@@ -348,6 +426,7 @@ namespace {
         int m{ 2 };
 
         auto lambda{ [=] { std::println("Copy:      {} {}", n, m); } };
+     
         return lambda;
     }
 
@@ -357,15 +436,17 @@ namespace {
         int m{ 2 };
 
         auto lambda{ [&] { std::println("Reference: {} {}", n, m); } };
-        return lambda;             // I would't do this never ever :-)
+        return lambda;                                         // I would't do this never ever :-)
     }
 
     static void lambda_10()
     {
-        auto outerLambda1{ helper_a() };
-        auto outerLambda2{ helper_b() };
+        auto outerLambda1= helper_a();
+
+        auto outerLambda2= helper_b();
 
         outerLambda1();
+
         outerLambda2();
     }
 
@@ -560,22 +641,24 @@ namespace {
 
 void main_lambdas()
 {
-    lambda_01();
-    lambda_02();
-    lambda_03();
-    lambda_04();
-    lambda_05();
-    lambda_06();
-    lambda_07();
-    lambda_08();
-    lambda_09();
+    //lambda_01_seminar();
+
+    //lambda_01();
+   // lambda_02();
+    //lambda_03();
+    //lambda_04();
+    //lambda_05();
+   // lambda_06();
+    //lambda_07();
+    //lambda_08();
+    //lambda_09();
     lambda_10();
-    lambda_11();
-    lambda_12();
-    lambda_13();
-    lambda_14();
-    lambda_15();
-    lambda_16();
+    //lambda_11();
+    //lambda_12();
+    //lambda_13();
+    //lambda_14();
+    //lambda_15();
+    //lambda_16();
 }
 
 // =====================================================================================

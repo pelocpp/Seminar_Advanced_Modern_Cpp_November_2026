@@ -21,22 +21,30 @@ namespace {
     void rvalue_lvalue_01() {
 
         std::string a = "Hello";
+
         std::string b = " World";
 
         sayHello(a);
-        sayHello(a + b);
+
+        // std::string&& tmp = a + b;
+
+        sayHello(a + b);  // a + b Konkatenation
     }
 
     // -------------------------------------------------------------------
 
     void helper(std::string&& message)
     {
-        sayHello(message);
-        // sayHello(std::move(message));    // casting an lvalue to an rvalue
+        sayHello(std::move(message));    // sayHello&&:  Typ Gleichheit
+                              // sayHello&:   
     }
 
     void rvalue_lvalue_02()
     {
+        std::string a = "Hello";
+
+        helper( std::move(  a )  );
+
         helper(std::string("Where are we going ..."));
     }
 

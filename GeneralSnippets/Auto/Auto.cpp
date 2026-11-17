@@ -14,6 +14,11 @@ namespace {
 
         // type deduction / type inference
 
+
+        //n = 123
+
+        //    n = "ABC"
+
         auto a = 1;                  // int
         auto b = 7ul;                // unsigned long
         auto c = 2.0;                // double
@@ -45,11 +50,10 @@ namespace {
 
         auto n{ 123 };                   // n is type of int
 
-        auto result{ getFunction() };    // result is type of ...
+        auto result = getFunction();    // result is type of ...
 
-        std::map<int, std::string> result2 {
-            getFunction()
-        };
+        std::map<int, std::string> result2 =
+            getFunction();
     }
 
     // ---------------------------------------------------------------------
@@ -60,7 +64,7 @@ namespace {
 
         std::unordered_map<int, std::string>::iterator it = anotherMap.begin();
 
-        // std::pair<int, std::string>& entry1 = *it;  // Why this line DOES NOT compile ???
+        //std::pair<int, std::string>& entry1 = *it;  // Why this line DOES NOT compile ???
 
         auto& entry2 = *it;
     }
@@ -72,15 +76,54 @@ namespace {
         return f1 + f2;
     }
 
+    // CPU: Arith. Befehle:  mul, add, sub,  ...
+
+    // No 16 Bit
+
+
+
     auto foo(bool flag, float f, double d) -> double
     {
         if (flag) {
-            return f;
+            return d;   // double
         }
         else {
-            return d;
+            return f;   
         }
     }
+
+    //template <typename T, typename U>
+    //auto tueWas(bool flag, T f, U d) -> decltype ( f + d )
+    //{
+    //    if (flag) {
+    //        return d;
+    //    }
+    //    else {
+    //        return f;
+    //    }
+    //}
+
+    template <typename T, typename U>
+    decltype (std::declval<T>() + std::declval<U>())
+        tueWas(bool flag, T f, U d)
+    {
+        if (flag) {
+            return d;
+        }
+        else {
+            return f;
+        }
+    }
+
+    void test_tueWas() {
+
+        auto result1 = tueWas(false, 123, 123.234);  // Stack Frame
+
+        auto result2 = tueWas(false, 123l, 123l);
+
+        auto result3 = tueWas(false, 123l, 123.234f);
+    }
+
 
     // type of the ternary ?: expression is the common type
     // of its second and third argument
@@ -150,14 +193,14 @@ namespace {
         Person(const std::string& name) : m_name(name) {}
 
         // getter
-        const std::string& getName() { return m_name; }
+        const std::string& getName() const { return m_name; };
     };
 
     void auto_06() {
 
         Person hans{ "Hans" };
 
-        auto name1{ hans.getName() };
+        auto name1 = hans.getName();
         std::println("Message: {}", name1);
 
         // but:
@@ -251,6 +294,8 @@ namespace {
 
 void main_auto()
 {
+    test_tueWas();
+    
     auto_01();
     auto_02();
     auto_03();

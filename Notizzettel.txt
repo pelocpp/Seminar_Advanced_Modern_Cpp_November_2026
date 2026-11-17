@@ -1,9 +1,189 @@
 // ===================================================
 
-Seminar "Modern C++"
+Seminar "Advanced Modern C++"
 
 Referent: Peter Loos
 
 "Guten Morgen"
 
 // ===================================================
+
+Dienstag Nachmittag:
+
+== SSO
+== Generische Funktionen
+== Algorithmen ( std::fill ........... )
+== Ein Beispiel für Performanz
+   (https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Data_Structures_and_Algorithms/Readme_STL_Algorithms.md#link8)
+== constexpr
+== Literale
+
+Mittwoch:
+
+-- Smart Pointer
+-- Ranges
+
+
+== Donnerstag:  
+
+-- Variadic Templates // Folding !!!
+-- std::variant // Buchhandlung mit std::variant
+-- std::variant // std::visit und Meta Programming
+
+-- Multithreading
+
+
+
+
+Todo:
+
+STL:   std::fill
+Kernphilosophie
+noexcept
+
+
+// ===================================================
+
+RValue Referenzen
+
+Whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+
+// ===================================================
+
+Move Semantik:
+
+0x000001ab8946 0fa0   // am Stack // temp, // wird wieder freigegeben
+
+0x000001ab8946 1630   // im Vektor
+
+2. Durchlauf:
+
+0x0000022180684a 80
+
+// ===================================================
+
+Generische Programmierung   // Templates
+
+C / C++:
+
+Regelwerk für Typkonvertierung:
+
+int + long = long
+
+float + double = double
+
+// ===================================================
+
+Ab C++ 11
+
+Lambdas:   Kochrezept
+
+Wie sehen Lambdas aus der Sicht von C++ aus ??????????
+
+Was ist ein Lambda  ===>  anon. Funktion.
+
+Ein Lambda ist ein Objekt !!!!!!!!!!!!!!!!!!!!!!
+
+// =================================
+
+Call-by-Referenz:
+        int m = n;
+00007FF73FB35391  mov         rax,qword ptr [n]  
+00007FF73FB35398  mov         eax,dword ptr [rax]  
+00007FF73FB3539A  mov         dword ptr [m],eax  
+
+
+Call-by-Value // Copy:
+        int m = n;
+00007FF629F95390  mov         eax,dword ptr [n]  
+00007FF629F95396  mov         dword ptr [m],eax  
+
+
+=======================================================
+
+Warum habe ich "Aufbare Objekte" betrachtet ???????????????
+
+Ein Lambda ist ein aufbares Objekt !!!
+
+std::for_each     // STL Algorithm
+
+1.) freie Funktion
+2.) Aufrufbares Objekt
+3.) Lambda
+
+=======================================================
+
+Tools:   Andreas Fertig
+
+Cpp Insights
+
+Converter:  Modern C++  ==> Classic C++
+
+
+Modern C++:  Syntatic Sugar ==> Classic C++
+
+   "Desugaring" ==>  auf vorhandenes abbilden
+
+Lambdas:  Objekte   ==> Attribute (member Variablen)  & Methode
+
+=======================================================
+
+int n = 1;
+
+int n ( 1 );
+
+int n { 1 };
+
+Uniform Initialization  // Brace Initialization
+
+
+        int intArray7[10]{ };
+00007FF7E4D0D2D9  lea         rax,[intArray7]  
+00007FF7E4D0D2E0  mov         rdi,rax  
+00007FF7E4D0D2E3  xor         eax,eax  
+00007FF7E4D0D2E5  mov         ecx,28h      // 28h = 40 = 4 * 10
+00007FF7E4D0D2EA  rep stos    byte ptr [rdi]  
+
+
+
+Wer ist der rep:  
+
+===========================================
+
+Nimm eine Klasse
+
+Sehr, sehr kleine Datenmengen:
+
+struct Point  // x,y
+
+struct Size // upper, lower
+
+std::tuple <>
+
+===========================================
+
+2  Aber:
+
+a) Narrowing
+b) () vs. {}
+
+
+std::vector<int> vec (10);     // Size: 10 - 10 Werte: 0
+
+std::vector<int> vec { 10 };   // Size 1:  1 elem: 10
+
+// =============================================================
+
+std::initializer_list
+
+
+// =============================================================
+
+
+SSO   Small String Optimization 
+
+// =============================================================
+
+
+
+
