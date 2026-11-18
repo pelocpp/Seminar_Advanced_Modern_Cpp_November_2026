@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Ranges\Program_Ramges.cpp" />
+    <ClCompile Include="..\Ranges\Ranges.cpp" />
     <ClCompile Include="Accumulate\Accumulate.cpp" />
     <ClCompile Include="Accumulate\Module_Accumulate.ixx" />
     <ClCompile Include="Algorithms\Algorithms.cpp" />
@@ -336,6 +338,7 @@
     <ClCompile Include="TemplateTemplateParameter\Module_TemplateTemplateParameter.ixx" />
     <ClCompile Include="TemplateTemplateParameter\TemplateTemplateParameter_01.cpp" />
     <ClCompile Include="TemplateTemplateParameter\TemplateTemplateParameter_02.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="ToUnderlying\Module_ToUnderlying.ixx" />
     <ClCompile Include="ToUnderlying\ToUnderlying.cpp" />
     <ClCompile Include="Transform\Module_Transform.ixx" />

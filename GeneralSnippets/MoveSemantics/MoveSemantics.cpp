@@ -53,6 +53,8 @@ namespace {
         m_data = new int[m_size];
 
         // initialize buffer
+        // 
+        //malloc ()
         std::fill(m_data, m_data + m_size, preset);
     }
 

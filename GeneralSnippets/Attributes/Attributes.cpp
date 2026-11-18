@@ -10,14 +10,15 @@ import std;
 
 namespace StandardAttributes {
 
-    [[ nodiscard ]] static int discard_test()
+    [[ nodiscard ]]
+    static int discard_test()
     {
         return 123;
     }
 
     static void test_01()
     {
-        int result = discard_test();
+        /*int result = */discard_test();
 
         // another call to discard_test:
         // 'warning: discarding return value of function with 'nodiscard' attribute'

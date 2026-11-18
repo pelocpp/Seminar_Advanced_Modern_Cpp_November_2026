@@ -13,6 +13,8 @@ import hello_world_module;
 
 import std;
 
+extern int main_ranges_demo();
+
 #define MessageText "Collection of Modern C++ Code Examples - Copyright (C) 2026 Peter Loos."
 
 #pragma message(MessageText)
@@ -21,11 +23,14 @@ int main()
 {
     std::println(MessageText);
 
+    //main_ranges_demo();
+    //return 0;
+
     // main entry points code snippets
     try
     {
         //main_accumulate();
-        //main_algorithms();
+       // main_algorithms();
         //main_all_of_any_of_none_of();
         //main_allocator();
         //main_any();
@@ -40,7 +45,7 @@ int main()
         //main_casts();
         //main_common_type();
         //main_concepts_requires_classes();
-        main_concepts_requires_functions();
+        //main_concepts_requires_functions();
         //main_const_variants();
         //main_constexpr();
         //main_constexpr_crc();
@@ -53,7 +58,7 @@ int main()
         //main_erase_remove_idiom();
         //main_expression_templates();
         //main_exception_safety();
-        //main_expected();
+       main_expected();
         //main_explicit_keyword();
         //main_folding();
         //main_functional_programming();
@@ -76,7 +81,7 @@ int main()
         //main_modularized_standard_library();
         //main_modules_hello_world();
       //  main_move_semantics();
-        //main_optional();
+       // main_optional();
         //main_perfect_forwarding();
         //main_placement_new();
         //main_println();
@@ -89,7 +94,7 @@ int main()
         //main_regular_expressions();
         //main_rvalue_lvalue();
         //main_sfinae();
-        //main_shared_ptr();
+     //   main_shared_ptr();
         //main_source_location();
         //main_spaceship_operator();
        // main_sso();
@@ -103,13 +108,13 @@ int main()
         //main_templates_template_parameter_02();
         //main_templates_specialization();
         //main_to_underlying();
-        //main_transform();
+      //  main_transform();
         //main_tuple(); 
         //main_two_phase_name_lookup();
         //main_type_erasure();
         //main_type_erasure_bookstore();
         //main_type_traits();
-        //main_unique_ptr();
+     //   main_unique_ptr();
         //main_variadic_templates_introduction();
         //main_variadic_templates_working_on_every_argument();
         //main_variadic_templates_sum_of_sums();

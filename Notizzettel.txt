@@ -10,25 +10,31 @@ Referent: Peter Loos
 
 Dienstag Nachmittag:
 
-== SSO
-== Generische Funktionen // auto
-== Algorithmen ( std::fill ........... )
-== Ein Beispiel für Performanz
-   (https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Data_Structures_and_Algorithms/Readme_STL_Algorithms.md#link8)
-== constexpr
-== Literale
+== SSO: jepp
+== Generische Funktionen: jepp
+== auto: jepp
 
 Mittwoch:
 
--- Smart Pointer
--- Ranges
-
+== Smart Pointer: jepp
+== Algorithmen ( std::fill , std::all_of ........... ) : jepp
+== Ein Beispiel für Performanz : jepp
+   (https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Data_Structures_and_Algorithms/Readme_STL_Algorithms.md#link8)
+== Helper Classes:
+   string_view, tuple, optional, expected, span, std::array
+== Ranges: jepp
+== Attribute: jepp
+== Structured Binding
+== constexpr
+== Literale
+== Legacy Code
 
 == Donnerstag:  
 
 -- Variadic Templates // Folding !!!
--- std::variant // Buchhandlung mit std::variant
 -- std::variant // std::visit und Meta Programming
+-- std::variant // Buchhandlung mit std::variant
+
 
 -- Multithreading
 
@@ -203,4 +209,186 @@ https://github.com/pelocpp/cpp_design_patterns/blob/master/Patterns/Facade/Resou
 
 ==================================================
 
+Welches Problem hat der Shared Pointer ???
+
+Er funktioniert nicht immer : delete 
+
+Zyklus der beteiligten Shared Pointer
+
+Observer - Pattern:
+
+Objekt mit Zustand // Daten die man beobachten möchte:
+
+   Beobachter kennen das Zustandsobjekt
+
+   Zustandsobjekt ==> Beobachter informieren.
+
+   A) Wie funktioniert der std::weak_ptr
+
+   B) Das Problem
+
+==========================================================================
+
+Frage / Diskussion:
+
+== Wann sollte ich welchen Smart Pointer in meiner SW verwenden ???
+
+==> a) std::unique_ptr !!!
+
+==> b) std::shared_ptr
+
+Das Objekt wird von verschiedenen Seiten benutzt:
+
+a) Es gibt einen ersten Besitzer: std::shared_ptr  // Zustands-Objekt (Wetter)
+
+b) Es gibt Beobachter:  std::shared_ptr 
+
+c) Wir kennt das Zustands-Objekt (Wetter) seine Beobachter ???
+
+   i) shared_ptr : Es muss die Beobachter "kennen" / es tut die Beobachter besitzen
+
+   ii) weak_ptr  <========= Hmm, was ist, wenn weak_ptr.lock ==> nullptr zurück
+
+       a) Keine Nachricht
+	   b) Aus der Liste entfernen
+
+A) "Ersten" std::shared_ptr fängt man an
+
+B) Bei jeder Kopie / Wertzuweisung:  Genügt ein Weak_Ptr // MUSS es ein Besitzer / shared_ptr sein
+
+===================================================================================
+
+Performanz / Robustheit:
+
+==> STL
+
+for-Schleife
+
+
+======================================================
+
+STL Stilistik:   STL Algorithmen
+
+16:     bool allValid = std::all_of(
+17:         users.begin(),
+18:         users.end(),
+19:         [](const User& user) {
+20:             return user.age >= 18 && user.emailVerified;
+21:         }
+22:     );
+
+
+Programmieren in "Building Blocks"
+
+Pro:
+
+Kein Verhaspeln mit Indices
+
+Logik: "ist besser lesbar"   ==> Lambda
+
+================================================================
+
+Konzept- Entscheidung
+
+STL Container   <===>  STL Iteratoren  <===> STL Algorithmen
+============================================================
+
+
+C++ 20: erase 
+
+STL Algorithmen: find, copy, transform, 
+
+Algorithmen kennen KEINE Container.
+
+
+std::vector  vec;
+
+vec.find (...
+
+
+=========================================================
+
+C++:  Bjarne Stroustrup
+
+STL:  Alexander Alexandrowitsch Stepanow
+
+--------------------------------------------
+
+STL 2.0:   Ranges
+
+Eric Niebler
+
+https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Ranges/Readme_Ranges.md
+
+==================================================================
+
+STL Klassen:  
+
+Helper / Utility - Klassen:
+
+std::string 
+
+std::string_view
+
+Wozu / wann verwende ich std::string_view ???
+
+Gegenfrage:
+
+const char* s = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+==> Read-Only Segment !!!!!!!!!!!!!!
+
+NICHT: Heap
+
+-------------
+
+std::string s = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+
+Am Heap
+
+Für konstante Zeichenketten bin ich schneller mit 
+
+const char* s // Bis C++ 11
+
+std::string_view:    Read-Only View
+
+Identisch mit 
+
+a) const char* s
+b) Size
+
+
+-----------------
+
+std::vector:  Heap
+std::initializer_list:  Stack
+
+std::string: Heap  // SSO
+std::string_view  // Adresse, in der Regel in einem RO - Data Segment
+                     plus Länge
+
+std::vector<T>
+std::array<T>
+C Array
+
+int* Pointer ==> std::span :
+
+Schachtel mit Adresse + Länge
+
+----------------------------------
+
+std::optional  
+
+
+std::expected  // C++ 23
+
+cpp(20,38): warning C4834:
+discarding return value of function with [[nodiscard]] attribute
+
+
+1>C:\Development\Seminar_Modern_Cpp_November_2026\GeneralSnippets\Expected\Expected.cpp(85,27):
+warning C4834: discarding return value of function with [[nodiscard]] attribute
+
+
+==========================================================
 

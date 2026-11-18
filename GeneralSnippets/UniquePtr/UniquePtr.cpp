@@ -23,7 +23,7 @@ namespace {
         // or
         // std::unique_ptr<int> ptr1{ std::make_unique<int>(123) };
         // or
-        // auto ptr1{ std::make_unique<int>(123) };
+        //auto ptr1{ std::make_unique<int>(123) };
 
         // access value behind smart pointer
         int n = *ptr1;
@@ -65,18 +65,24 @@ namespace {
 
     std::unique_ptr<int> loadUniquePointer()
     {
+        std::unique_ptr<int> dummy;
+
         std::unique_ptr<int> ptr{ std::make_unique<int>(100) };
+
+        *ptr = 200;
+
+        // return std::move(ptr);   // Don't do this !!!!
         return ptr;
     }
 
-    void storeUniquePointer(std::unique_ptr<int>& ptr)
+    void storeUniquePointer(const std::unique_ptr<int>& ptr)
     {
         std::println("*ptr:    {}", *ptr);
         (*ptr)++;
         std::println("*ptr:    {}", *ptr);
 
         // take ownership right now:
-        // std::unique_ptr<int> ptr2{ std::move(ptr) };
+        //std::unique_ptr<int> ptr2{ std::move(ptr) };
     }
 
     void storeUniquePointerSafe(const std::unique_ptr<int>& ptr)
@@ -103,14 +109,14 @@ namespace {
     void unique_pointer_02()
     {
         // retrieving a unique pointer from a function
-        std::unique_ptr<int> ptr{ loadUniquePointer() };
+        std::unique_ptr<int> ptr = loadUniquePointer();
         std::println("*ptr:    {}", *ptr);
 
         // provide a function with a unique pointer: who owns the pointer now?
         storeUniquePointer(ptr);
 
         // C++ Core Guidelines
-        storeUniquePointerAlternate(ptr.get());
+   //     storeUniquePointerAlternate(ptr.get());
 
         // does this work?
         std::println("*ptr:    {}", *ptr);
@@ -141,14 +147,17 @@ namespace {
 
         // ======================
 
-        auto ptr3 = std::move(vec[0]);
-        auto& ptr4 = vec[1];
+        auto ptr3 = std::move(vec[0]);  // Not optimal
+
+        const auto& ptr4 = vec[1];   // Ref auf Unique Ptr
 
         processDataCLike(vec[1].get());    // C-Stylistics, using native address 
 
         processDataCppLike(*vec[1].get()); // C++-Stylistics, using reference syntax
         // or
         processDataCppLike(*vec[1]);       // C++-Stylistics, using reference syntax
+        // 
+        processDataCppLike(*ptr4);
     }
 
     // ===========================================================================

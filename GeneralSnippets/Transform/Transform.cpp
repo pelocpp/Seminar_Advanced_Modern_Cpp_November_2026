@@ -17,6 +17,7 @@ namespace {
         // very simple phone book
         std::cout << "List of Entries: " << std::endl;
 
+        // Python: Dictionary
         std::unordered_map<std::string, std::size_t> phonebook
         {
             { "Hans Meier" ,     12345678 },
@@ -28,13 +29,21 @@ namespace {
             std::cout << name << ": " << number << std::endl;
         }
 
-        std::vector<std::string> names(phonebook.size());  // set size of vector (!)
+        std::vector<std::string> names;  // set size of vector (!)
 
         // std::transform on a single range - retrieve names from phonebook
+        
+        // wie wird bei der Transformation in den Zielcontainer
+        // geschrieben ??? push_back: No  // operator=
+        
+        
         std::transform(
             phonebook.begin(),
             phonebook.end(),
-            names.begin(),      // beginning of the destination range
+
+            std::back_inserter (names),   //  push_back
+
+         //   names.begin(),      // beginning of the destination range
             [](const std::pair<const std::string, std::size_t>& entry) {
                 return std::get<0>(entry);
             }

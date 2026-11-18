@@ -67,7 +67,9 @@ namespace {
     //==================================================================================
     // std::expected
 
-    std::expected<double, std::string> divide(double numerator, double denominator) {
+    [[nodiscard]]
+    std::expected<double, std::string>
+    divide(double numerator, double denominator) {
 
         if (denominator == 0.0) {
             return std::unexpected{ "Error: Division by zero" };
@@ -91,7 +93,7 @@ namespace {
 
         result = divide(numerator, denominator);
 
-        if (!result.has_value()) {
+        if (! result.has_value()) {
             std::println("Error: {}", result.error());
         }
     }
@@ -249,8 +251,8 @@ namespace {
     void excepted_05()
     {
         auto numerator = 20.0;
-        auto denominator = 2.5;         // success
-        // auto denominator = 20.0;     // error
+        // auto denominator = 2.5;         // success
+        auto denominator = 20.0;     // error
 
         auto result = divide(numerator, denominator)
             .and_then(addFive)
@@ -262,9 +264,9 @@ namespace {
         if (result.has_value()) {
             std::println("Final Result: {}", result.value());
         }
-        else {
-            std::println("Error: {}", result.error());
-        }
+        //else {
+        //    std::println("Error: {}", result.error());
+        //}
     }
 
     void excepted_06()

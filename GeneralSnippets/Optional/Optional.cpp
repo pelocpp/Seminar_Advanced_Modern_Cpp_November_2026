@@ -174,7 +174,8 @@ namespace {
     };
 
     std::optional<User> findUser(int id) {
-        if (auto it = database.find(id); it != database.end()) {
+
+        if (auto it = database.find(id) ; it != database.end()) {
             return it->second;
         }
 
@@ -212,21 +213,23 @@ namespace {
     {
         for (int id : { 0, 1, 2, 3, 4, 5 }) {
             auto domain = domainOf(id).or_else([] {
-                // std::println("  >>> no valid domain found");
+                std::println("  >>> no valid domain found");
                 return std::optional<std::string>{};
+                // return std::nullopt;
                 }
             );
-            std::println("{}: {}", id, domain.value_or("<none>"));
+            //auto domain = domainOf(id);
+            //std::println("{}: {}", id, domain.value_or("<none>"));
         }
     }
 }
 
 void main_optional()
 {
-    optional_01_standard_creation();
-    optional_02_more_creation_options();
-    optional_03_with_methods();
-    optional_04_value_or();
+    //optional_01_standard_creation();
+    //optional_02_more_creation_options();
+    //optional_03_with_methods();
+    //optional_04_value_or();
     optional_05_monadic();
 }
 

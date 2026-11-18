@@ -22,6 +22,9 @@
     <Filter Include="Images">
       <UniqueIdentifier>{f38d6bc2-2f11-43df-af11-e4e28755f82a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ranges">
+      <UniqueIdentifier>{3bbf40f2-e390-4d2e-8bc5-1eb3d24335ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -680,6 +683,15 @@
     </ClCompile>
     <ClCompile Include="LegacyToModernity\Module_LegacyToModernity.ixx">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Ranges\Program_Ramges.cpp">
+      <Filter>Ranges</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Ranges\Ranges.cpp">
+      <Filter>Ranges</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

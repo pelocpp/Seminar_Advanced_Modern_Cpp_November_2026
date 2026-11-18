@@ -346,7 +346,7 @@ namespace {
         std::array arr{ 6, 7, 8, 9, 10 };
         printArray(arr.data(), arr.size());
 
-        std::vector vec{ 1, 3, 5, 7, 9 };
+        std::vector<int> vec{ 1, 3, 5, 7, 9 };
         printArray(vec.data(), vec.size());
     }
 
@@ -367,23 +367,23 @@ namespace {
 
     void array_31() {
 
-        int carr[]{ 1, 2, 3, 4, 5 };
-        printArray(carr);
-
-        std::array arr{ 6, 7, 8, 9, 10 };
-        printArray(arr);
-
-        std::vector<int> vec{ 1, 3, 5, 7, 9 };
-        printArray(vec);
-
         //int carr[]{ 1, 2, 3, 4, 5 };
-        //printArray(std::span{ carr });
+        //printArray(carr);
 
         //std::array arr{ 6, 7, 8, 9, 10 };
-        //printArray(std::span{ arr });
+        //printArray(arr);
 
-        //std::vector vec{ 1, 3, 5, 7, 9 };
-        //printArray(std::span{ vec });
+        //std::vector<int> vec{ 1, 3, 5, 7, 9 };
+        //printArray(vec);
+
+        int carr[]{ 1, 2, 3, 4, 5 };
+        printArray(std::span{ carr });
+
+        std::array arr{ 6, 7, 8, 9, 10 };
+        printArray(std::span{ arr });
+
+        std::vector vec{ 1, 3, 5, 7, 9 };   //   .size()
+        printArray(std::span{ vec });
     }
 
     // --------------------------------------------------------------------

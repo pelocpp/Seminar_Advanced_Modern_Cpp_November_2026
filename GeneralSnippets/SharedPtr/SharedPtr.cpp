@@ -30,7 +30,7 @@ namespace {
         // or
         // std::shared_ptr<int> ptr1{ std::make_shared<int>(123) };
         // or
-        // auto ptr1{ std::make_shared<int>(123) };
+        //auto ptr1{ std::make_shared<int>(123) };
 
         // access value behind smart pointer
         int n = *ptr1;
@@ -80,7 +80,7 @@ namespace {
     }
 
     // note: play with 'call-by-value' or 'call-by-reference'
-    void storeSharedPointer(std::shared_ptr<int> ptr)
+    void storeSharedPointer(std::shared_ptr<int>& ptr)
     {
         std::println("Inner scope: {}", ptr.use_count());
     }
