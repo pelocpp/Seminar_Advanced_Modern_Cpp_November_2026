@@ -47,7 +47,7 @@ int main()
         //main_concepts_requires_classes();
         //main_concepts_requires_functions();
         //main_const_variants();
-        //main_constexpr();
+     //   main_constexpr();
         //main_constexpr_crc();
         //main_constructor_invocations();
         //main_copy_move_elision();
@@ -58,7 +58,7 @@ int main()
         //main_erase_remove_idiom();
         //main_expression_templates();
         //main_exception_safety();
-       main_expected();
+       //main_expected();
         //main_explicit_keyword();
         //main_folding();
         //main_functional_programming();
@@ -69,7 +69,7 @@ int main()
      //   main_initializer_list();
         //main_input_output_streams();  
         //main_invoke();
-        //main_is_transparent();
+        main_is_transparent();
       //  main_lambdas();
         //main_lambda_and_closure();
         //main_lambdas_this_closure();
@@ -100,7 +100,7 @@ int main()
        // main_sso();
         //main_static_assert();
         //main_string_view();
-        //main_structured_binding();
+       // main_structured_binding();
         //main_templates_class_basics_01();
         //main_templates_class_basics_02();
         //main_templates_function_basics();

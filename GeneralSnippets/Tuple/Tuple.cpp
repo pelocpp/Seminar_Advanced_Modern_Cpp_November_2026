@@ -87,6 +87,10 @@ namespace {
     // =======================================================
     // same example, but using C++ 17 structured binding
 
+
+    using Row2 = std::tuple<int, char, double, std::string>;
+
+
     void tuples_03()
     {
         Row row1{ 10, 'A', 1.11, "Mueller" };
@@ -107,6 +111,7 @@ namespace {
         std::println("Value: {}", val);
         std::println("Name:  {}", name);
 
+        // Range-based Loop & Structured Binding
         for (const auto& [id, abbr, val, name] : mySheet)
         {
             std::println("Id:    {}", id);

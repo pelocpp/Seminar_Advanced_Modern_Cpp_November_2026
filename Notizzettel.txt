@@ -392,3 +392,20 @@ warning C4834: discarding return value of function with [[nodiscard]] attribute
 
 ==========================================================
 
+DTO  DAta Transfer Object
+
+char*
+
+std::string
+
+        std::tuple <char, int, double> values;
+
+	Sehr ähnlich:
+
+	Struktur für SChreibfaule: 
+
+=========================================================
+
+constexpr
+
+

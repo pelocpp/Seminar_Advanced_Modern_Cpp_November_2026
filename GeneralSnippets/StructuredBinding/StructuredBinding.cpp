@@ -32,16 +32,19 @@ namespace {
     {
         auto [quotient, remainder] { divide_remainder(20, 3) };
 
-        std::println("16 / 3 is {} with a remainder of {}", quotient, remainder);
+        std::println("16 / 3 is {} with a remainder of {}",
+            quotient, remainder);
     }
 
     void structured_binding_03()
     {
-        int arr[] { 123, 456, 789 };
+        int arr[3] { 123, 456, 789 };
 
-        auto [a, b, c] { arr };
+        auto& [a, b, c] { arr };
 
-        std::println("{}, {}, {}", a, b, c);
+        a = 999;
+
+        std::println("{}, {}, {}", arr[0], b, c);
     }
 
     void structured_binding_04()

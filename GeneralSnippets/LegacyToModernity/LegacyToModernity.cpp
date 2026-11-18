@@ -372,9 +372,10 @@ namespace {
 
         std::string one{ "one" };
         strings.insert(one);
-        strings.insert("two");   // is there a (performance) problem ???
+        strings.insert("two");                     // is there a (performance) problem ???
 
         auto pos = strings.find("one");
+        // intern; aus "one"  ==> std::string tmp("one");
     }
 
     void legacy_is_transparent_02()
