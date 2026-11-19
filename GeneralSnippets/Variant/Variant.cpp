@@ -17,6 +17,8 @@ namespace {
 
         std::variant<int, double, std::string> var{ 123 };
 
+        std::variant<int, double, std::string> var2 {};
+
         // -------------------------------------------------
 
         {
@@ -129,13 +131,54 @@ namespace {
 
     // -------------------------------------------------------------------
 
+    // primary template
+    template <class T>
+    struct my_remove_reference {
+        using type = T;
+    };
+
+    // template specialization: Sonderfall: T = short
+    template <>
+    struct my_remove_reference<short> {
+        using type = short;
+    };
+
+    // template specialization: Sonderfall: T&
+    template <class T>
+    struct my_remove_reference<T&> {
+        using type = T;
+    };
+
+
+
+
     void variant_05() {
 
         std::variant<int, double, std::string> var{ 123 };
 
         // using a generic visitor (matching all types in the variant)
         auto visitor = [](const auto& elem) {
-            std::println("{}", elem);
+
+            using ElemType = decltype (elem);
+            using ElemTypeWithoutRef = my_remove_reference<ElemType>::type;
+            using ElemTypeWithoutRefAndConst = std::remove_const<ElemTypeWithoutRef>::type;
+
+            if constexpr (std::is_same<ElemTypeWithoutRefAndConst, int>::value == true)
+            {
+                std::println("int: {}", elem);
+            }
+            else if constexpr (std::is_same<ElemTypeWithoutRefAndConst, double>::value == true)
+            {
+                std::println("double: {}", elem);
+            }
+            else if constexpr (std::is_same<ElemTypeWithoutRefAndConst, std::string>::value == true)
+            {
+                std::println("std::string: {}", elem);
+                std::println("Length: {}", elem.size());
+            }
+            else {
+                std::println("Unbekannt !!");
+            }
         };
 
         std::visit(visitor, var);
@@ -225,6 +268,10 @@ namespace {
     // -------------------------------------------------------------------
 
     void variant_08() {
+
+        std::variant<std::size_t, std::array<int, 1000>> testVar;  // alle Werte als VALUE
+
+        auto s = sizeof(testVar);
 
         std::vector<std::variant<int, long, long long, float, double>> vec
         {

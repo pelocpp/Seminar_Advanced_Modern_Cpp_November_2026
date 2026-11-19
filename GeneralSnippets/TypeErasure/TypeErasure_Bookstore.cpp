@@ -27,6 +27,7 @@ namespace BookStoreUsingDynamicPolymorphism {
         virtual std::size_t getCount() const = 0;
     };
 
+
     class Book : public IMedia
     {
     private:
@@ -77,6 +78,7 @@ namespace BookStoreUsingDynamicPolymorphism {
     {
     private:
         using Stock = std::vector<std::shared_ptr<IMedia>>;
+
         using StockList = std::initializer_list<std::shared_ptr<IMedia>>;
 
         Stock m_stock;
@@ -124,7 +126,8 @@ namespace BookStoreUsingDynamicPolymorphism {
         std::shared_ptr<IMedia> movieBond{ std::make_shared<Movie>("Spectre", "Sam Mendes", 8.99, 6) };
 
         Bookstore bookstore{
-            cBook, movieBond, javaBook, cppBook, csharpBook, movieTarantino
+            cBook, movieBond, javaBook, cppBook,
+            csharpBook, movieTarantino
         };
 
         double balance{ bookstore.totalBalance() };
@@ -240,19 +243,23 @@ namespace BookStoreUsingTypeErasure {
     };
 
     template<typename T>
-    concept MediaConcept = requires (const T & m)
+    concept MediaConcept = requires (const T& m)
     {
         { m.getPrice() } -> std::same_as<double>;
         { m.getCount() } -> std::same_as<std::size_t>;
     };
 
     template <typename ... TMedia>
-        requires (MediaConcept<TMedia> && ...)
+
+        requires ( MediaConcept<TMedia> && ... )
+
     class Bookstore
     {
     private:
-        using StockType = std::variant<TMedia ...>;
+        using StockType = std::variant <TMedia ...>;  // std::variant<Book, Movie>
+
         using Stock     = std::vector<StockType>;
+
         using StockList = std::initializer_list<StockType>;
 
         Stock m_stock;
@@ -265,7 +272,7 @@ namespace BookStoreUsingTypeErasure {
             requires MediaConcept<T>
         void addMedia(const T& media) {
             m_stock.push_back(StockType{ media });    // detailed notation
-            // m_stock.push_back(media);              // implicit type conversion (T => std::variant<T>)
+          //  m_stock.push_back(media);              // implicit type conversion (T => std::variant<T>)
         }
 
         // or
@@ -278,15 +285,15 @@ namespace BookStoreUsingTypeErasure {
 
             double total{};
 
-            for (const auto& media : m_stock) {
+            for (const auto& media : m_stock) {  // media:   std::variant
 
                 double price{};
                 std::size_t count{};
 
                 std::visit(
-                    [&](const auto& element) {
-                        price = element.getPrice();
-                        count = element.getCount();
+                    [&](const auto& element) {    // gen. Lambda
+                        price = element . getPrice();   // Media Concept
+                        count = element.getCount();    // stat. Aufruf
                     },
                     media
                 );

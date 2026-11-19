@@ -31,7 +31,7 @@ Mittwoch:
 
 == Donnerstag:  
 
--- Variadic Templates // Folding !!!
+-- Variadic Templates // Folding !!! : jepp
 -- std::variant // std::visit und Meta Programming
 -- std::variant // Buchhandlung mit std::variant
 
@@ -430,3 +430,123 @@ n1 + n2 + n3 + n4 ....
 Diesen Ausdruck "performanter" umsetzen:
 
 Spezielle Syntax.
+
+==============================================================
+
+Klasse std::variant
+
+Helfer-Klasse
+
+Excel-App // Sheets
+
+Cell: Zelle:  Zahl, Zeichenkette, Datum, Währung, ...
+
+std::any
+
+if:
+
+if compile_time 
+
+ if constexpr
+
+
+==============================================================
+
+Vererbung
+
+std::vector <int>
+
+Container in C++:  Elemente desselben Typs
+
+Homogene Container in C++:
+
+Mögliche Alternative:
+
+std::vector<std::variant> 
+
+
+---------------------------------------
+
+Java / C#:
+
+class Rectangle extends Object
+{
+}
+
+Heterogene Container
+
+ArrayList liste;
+
+==============================================================
+
+Alternative für Vererbung
+-------------------------
+
+Pro  // Contra
+
+Beispiel:
+
+Vererbung
+
+Problem des Entwurfs:   is-a Beziehung
+
+virtual:    "langsam" 
+
+
+Statischer Polymorphismus
+
+
+Buchhandlung:
+
+Medien  // Buch, CD, DVD,...
+
+// Type Erasure ....  KEIN Anwendungsbeispiel
+// std::any,  std::function, std::variant
+
+
+Alternative für Vererbung:
+
+a) Verwende beliebige Klassen // KEINE Vererbung / Ableitung von einer Basisklasse
+
+b) Methoden wie
+
+        double getPrice() const { return m_price; }
+        std::size_t getCount() const { return m_count; }
+
+	Verlust des Basis Interfaces gleichen wir mit einem Konzept aus:
+
+    template<typename T>
+    concept MediaConcept = requires (const T& m)
+    {
+        { m.getPrice() } -> std::same_as<double>;
+        { m.getCount() } -> std::same_as<std::size_t>;
+    };
+
+c) Datenhaltung:
+
+std::vector < KEIN Schnittstellenzeiger >
+
+std::vector < std::variant >
+
+d) Wir sieht nun eine Methodenaufruf im Sinne von getPrice aus ???
+
+// Stellvertreter einer virtuellen Methoden im Sinne der Vererbung.
+
+std::visit über einen std::variant
+
+Ist das schneller ??????????????????????????????????????
+
+Depends :)
+
+Kritische Stellen:
+
+std::variant : Einpacken  // VALUE  // Smart_Pointer
+
+Frage:  Was kommt am häufigsten vor:
+
+== Den Container mit Werten belegen / addMedia
+
+== Durchlaufen : . // Direktem Aufruf
+
+
+
