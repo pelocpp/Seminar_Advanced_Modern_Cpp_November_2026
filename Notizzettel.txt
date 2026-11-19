@@ -549,4 +549,118 @@ Frage:  Was kommt am häufigsten vor:
 == Durchlaufen : . // Direktem Aufruf
 
 
+==========================================================
+
+long counter = 0;
+
+a) Zähle counter 1.000.000 Million mal hoch (+1)
+
+b) Zähle counter 1.000.000 Million mal runter (-1)
+
+Frage:
+
+Welcher Wert steht in counter ???   0
+
+                ++m_counter;
+// Lesen: Wert in den Akku schreiben
+00007FF6CCA62BE3  mov         rax,qword ptr [this]  
+00007FF6CCA62BEA  mov         eax,dword ptr [rax]  
+
+00007FF6CCA62BEC  inc         eax    // ++
+
+// <=====================================   Interrupt
+// EAX:  100
+
+// Scheduler:  Speicherbereich  // Stack // werden alle Register gerettet
+// 100, 99, 98, 97, ....
+................
+// Scheduler:  Speicherbereich  // Stack // werden alle Register gerettet
+// EAX:  100
+
+// Wert zurück in den Speicher zurück schreiben
+00007FF6CCA62BEE  mov         rcx,qword ptr [this]  
+00007FF6CCA62BF5  mov         dword ptr [rcx],eax  
+
+
+// ==============================================================
+
+IDIOM:   RAII
+
+// ==============================================================
+
+Threading:   
+
+Konkurrenz  // gleichzeitige Zugriff
+
+Kooperation // 
+
+1 Thread möchte Daten verarbeiten :  kann ich warten:: wait (suspend)
+
+Condition Queue:  Bedingung ....
+
+1 Thread möchte Daten herstellen:    kann ich informieren :
+
+                                          notify 
+
+std::condition_variable
+
+
+// ==============================================================
+
+1 Thread möchte Daten verarbeiten :  kann ich warten:: wait (suspend)
+
+1 Thread möchte Daten herstellen:    kann ich informieren :
+
+Kann ich die hergestellten Daten von einem Thread zu einem zweiten
+Thread weiterreichen ??????????????????????
+
+
+std::thread: NEIN
+
+std::async: Ja
+
+// ===========================================================================
+
+std::async 
+
+vs.
+
+std::thread
+
+HANDLE CreateThread(
+
+  [in, optional]  LPSECURITY_ATTRIBUTES   lpThreadAttributes,
+  [in]            SIZE_T                  dwStackSize,
+  [in]            LPTHREAD_START_ROUTINE  lpStartAddress,
+  [in, optional]  __drv_aliasesMem LPVOID lpParameter,
+  [in]            DWORD                   dwCreationFlags,
+  [out, optional] LPDWORD                 lpThreadId
+);
+
+BOOL QueueUserWorkItem(
+  [in]           LPTHREAD_START_ROUTINE Function,
+  [in, optional] PVOID                  Context,   // Parameter
+  [in]           ULONG                  Flags
+);
+
+
+
+ist teuer ===> Kann nur einmal verwendet / gestartet werden: Restart NO
+
+Laufzeit // Kernel
+
+Web Services // 
+
+=================================================================
+
+Thread Pool
+
+C++:    std::async
+
+
+
+
+
+     
+
 
