@@ -3,6 +3,11 @@
 Seminar "Advanced Modern C++"
 
 Referent: Peter Loos
+
+peter.loos@gmx.de
+-----------------
+
+https://github.com/pelocpp
  
 "Guten Morgen"
 
