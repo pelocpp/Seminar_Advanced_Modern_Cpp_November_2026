@@ -9,6 +9,132 @@ import scoped_timer;
 
 namespace {
 
+    template <typename ... TArgs>     // types pack
+    int addierer(TArgs ... args) {    // parameter pack
+                                      // Syntax: Komma-getrennte Liste
+        // auspacken
+
+        auto list = { args ... };
+
+        auto result = 0;
+
+        for (auto elem : list) {
+            result += elem;
+        }
+
+        return result;
+    }
+
+    template <typename ... TArgs>       // types pack
+    int addiererEx(TArgs ... args) {    // parameter pack
+
+
+        auto result = ( ...    + args    );
+
+        return result;
+    }
+
+    template <typename ... TArgs>       // types pack
+    int subtrahierer(TArgs ... args) {    // parameter pack
+
+        // 1 - (2 - 3) = 1 - -1 = +2
+        // (1 - 2) - 3 =         -4 
+
+        auto result = (args -  ...);
+
+        return result;
+    }
+
+    void test_variadic_die_erste() {
+                                          // einpacken
+        int result = addiererEx(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        int result2 = addierer(1, 2, 3, 4);
+
+        result2 = subtrahierer(1, 2, 3);
+    }
+
+    // ========================================================================
+// Test-Klasse DoSomething
+// Nur die Konstruktoren sind interessant
+// ========================================================================
+
+    class DoSomething {
+    private:
+        int m_var1;
+        int m_var2;
+        int m_var3;
+
+    public:
+        DoSomething() : m_var1{}, m_var2{}, m_var3{} {
+            std::println("c'tor()");
+        }
+
+        DoSomething(int n) : m_var1{ n }, m_var2{}, m_var3{} {
+            std::println("c'tor(int)");
+        }
+
+        DoSomething(int n, int m) : m_var1{ n }, m_var2{ m }, m_var3{} {
+            std::println("c'tor(int, int)");
+        }
+
+        DoSomething(int n, int m, int k) : m_var1{ n }, m_var2{ m }, m_var3{ k } {
+            std::println("c'tor(int, int, int)");
+        }
+
+        ~DoSomething() {
+            std::println("d'tor()");
+        }
+
+        friend std::ostream& operator<< (std::ostream&, const DoSomething&);
+    };
+
+    std::ostream& operator<< (std::ostream& os, const DoSomething& obj) {
+        os
+            << "var1: " << obj.m_var1
+            << ", var2: " << obj.m_var2
+            << ", var3: " << obj.m_var3;
+
+        return os;
+    }
+
+    template <typename T, typename ... TArgs>
+    auto my_make_unique(TArgs ... args) {
+
+        std::unique_ptr<T> tmp{ new T{ args ... } };
+        return tmp;
+    }
+
+    template <typename T, typename ... TArgs>
+    auto my_make_unique_ex(TArgs&& ... args) {
+
+        std::unique_ptr<T> tmp{ new T{ std::forward<TArgs>(args) ... } };
+        return tmp;
+    }
+
+    void test_variadic() {
+
+        //std::unique_ptr<DoSomething> ptr = 
+        //    std::make_unique<DoSomething>(1, 2, 3);
+
+        int x = 123;
+
+        std::unique_ptr<DoSomething> ptr = 
+            my_make_unique_ex<DoSomething>(1, x, 3);
+    }
+
+    void test_variadic_emplace() {
+    
+        std::vector<DoSomething> vec;
+
+        vec.emplace_back(4, 5, 6);
+
+        vec.push_back(DoSomething{});
+    
+    }
+
+
+
     /* folding examples: introduction
     */
 
@@ -233,6 +359,9 @@ namespace {
 
 void main_folding()
 {
+    test_variadic();
+    return;
+
     folding_01();
     folding_02();
     folding_03a();

@@ -25,6 +25,7 @@ namespace {
         overloaded(arg);
     }
 
+
     template <typename T>
     void forwardingPerfect(T&& arg) {
         overloaded(std::forward<T>(arg));
@@ -57,7 +58,7 @@ namespace {
 
         // T obj1 = std::forward<T>(arg1);
         // vs
-        T obj1 = arg1;
+        T obj1 = std::forward<T>(arg1);
         std::println("[{}]", arg1);
 
         U obj2 = std::forward<U>(arg2);

@@ -3,7 +3,7 @@
 Seminar "Advanced Modern C++"
 
 Referent: Peter Loos
-
+ 
 "Guten Morgen"
 
 // ===================================================
@@ -409,3 +409,24 @@ std::string
 constexpr
 
 
+=========================================================
+
+Whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+
+Daten: Ein oder mehrere Parameter
+
+A nach B
+
+=========================================================
+
+Folding:
+
+Operator:  
+
+1 + 2 + 3 + 4 + 5 + 6 + 7 + 8
+
+n1 + n2 + n3 + n4 ....
+
+Diesen Ausdruck "performanter" umsetzen:
+
+Spezielle Syntax.

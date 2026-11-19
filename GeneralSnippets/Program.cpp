@@ -60,7 +60,7 @@ int main()
         //main_exception_safety();
        //main_expected();
         //main_explicit_keyword();
-        //main_folding();
+        main_folding();
         //main_functional_programming();
         //main_functional_programming_legacy();
         //main_functional_programming_alternate();
@@ -69,7 +69,7 @@ int main()
      //   main_initializer_list();
         //main_input_output_streams();  
         //main_invoke();
-        main_is_transparent();
+        //main_is_transparent();
       //  main_lambdas();
         //main_lambda_and_closure();
         //main_lambdas_this_closure();
@@ -82,7 +82,7 @@ int main()
         //main_modules_hello_world();
       //  main_move_semantics();
        // main_optional();
-        //main_perfect_forwarding();
+    //    main_perfect_forwarding();
         //main_placement_new();
         //main_println();
         //main_raii();
